@@ -1,12 +1,11 @@
 import { useState } from 'react';
 
 const NewCardForm = ({ handleSubmit }) => {
-  const kDefaultFormState = {
+  const newCard = {
     message: '',
-    preview: '',
   };
 
-  const [formData, setFormData] = useState({kDefaultFormState});
+  const [formData, setFormData] = useState({newCard});
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -15,8 +14,8 @@ const NewCardForm = ({ handleSubmit }) => {
 
   const onHandleSubmit = (event) => {
     event.preventDefault();
-    handleSubmit(formData);
-    setFormData(kDefaultFormState);
+    handleSubmit({ message: formData.message });
+    setFormData(newCard);
   };
 
   return (

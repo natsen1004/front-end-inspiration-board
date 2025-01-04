@@ -13,7 +13,7 @@ const convertFromApi = (apiCard) => {
 function App () {
   const [cardData, setCardData] = useState([]);
 
-  const cardAPIUrl = 'http://127.0.0.1:5000';
+  const cardAPIUrl = 'https://live-love-inspire-back-end-inspiration.onrender.com';
 
   const handleSubmit = (cardData) => {
     // next line needs to change after define the board API
