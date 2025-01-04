@@ -13,11 +13,11 @@ const convertFromApi = (apiCard) => {
 function App () {
   const [cardData, setCardData] = useState([]);
 
-  const cardAPIUrl = 'https://live-love-inspire-back-end-inspiration.onrender.com';
+  const BackendUrl = 'https://live-love-inspire-back-end-inspiration.onrender.com';
 
   const handleSubmit = (cardData) => {
     // next line needs to change after define the board API
-    axios.post(`${cardAPIUrl}/boards/1/cards`, cardData) 
+    axios.post(`${BackendUrl}/boards/1/cards`, cardData) 
       .then(result => {
         setCardData((prevCards) => [convertFromApi(result.data.card), ...prevCards]);
       })
