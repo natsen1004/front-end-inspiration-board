@@ -1,35 +1,55 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Card from './components/Card';
+import CardTest from './CardTest';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <div className="App">
+            <CardTest />
+        </div>
+    );
 }
 
-export default App
+// function App() {
+//   const [count, setCount] = useState(0)
+
+
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <h1>LLI's Inspiration Board</h1>
+//       </header>
+//       <main>
+//         <div className="board-section">
+//           <BoardList boards={boards} onSelectBoard={handleSelectBoard} />
+//           {showBoardForm && (
+//             <NewBoardForm onSubmit={handleAddBoard} onCancel={() => setShowBoardForm(false)} />
+//           )}
+//           {!showBoardForm && <button onClick={() => setShowBoardForm(true)}>Create New Board</button>}
+//         </div>
+
+//         <div className="selected-board-section">
+//           {selectedBoard ? (
+//             <>
+//               <Board board={selectedBoard} />
+//               <CardList cards={cards} />
+//               {showCardForm && (
+//                 <NewCardForm onSubmit={handleAddCard} onCancel={() => setShowCardForm(false)} />
+//               )}
+//               {!showCardForm && (
+//                 <button onClick={() => setShowCardForm(true)}>Create New Card</button>
+//               )}
+//             </>
+//           ) : (
+//             <p>Select a Board from the Board List!</p>
+//           )}
+//         </div>
+
+//         {errorMessage && <div className="error-message">{errorMessage}</div>}
+//       </main>
+//     </div>
+//   );
+// }
+
+// export default App;

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Card.css";
 
+
 const Card = ({ card, onLike, onDelete }) => {
   const { id, message, likes_count } = card;
 
@@ -29,7 +30,7 @@ const Card = ({ card, onLike, onDelete }) => {
   );
 };
 
-CardComponent.propTypes = {
+Card.propTypes = {
   card: PropTypes.shape({
     id: PropTypes.number.isRequired,
     message: PropTypes.string.isRequired,
@@ -39,4 +40,4 @@ CardComponent.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export default CardComponent;
+export default Card;
