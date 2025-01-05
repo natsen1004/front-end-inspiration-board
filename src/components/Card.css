@@ -1,0 +1,72 @@
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: traslateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-message {
+  font-size: 1re,;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.card-likes {
+  font-size: 1rem;
+  color: #777;
+}
+
+button.like-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.like-button:hover {
+  background-color: #45a049;
+}
+
+button.delete-button {
+  background-color: #f44336;
+  color: white;
+  padding: 9px 12px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.delete-button:hover {
+  background-color: #e53935;
+}
+
+button:focus {
+  outline: 2px solid #ccc;
+}

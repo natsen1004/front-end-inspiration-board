@@ -1,4 +1,10 @@
-import './App.css';
+import './App.css';                  
+import './index.css';                
+import './components/CardList.css';   
+import './components/Card.css';      
+import './components/Board.css';    
+import './components/NewBoardForm.css'; 
+import './components/NewCardForm.css';  
 import NewCardForm from './components/NewCardForm.jsx';
 import NewBoardForm from './components/NewBoardForm';
 import axios from 'axios';

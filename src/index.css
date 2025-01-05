@@ -66,3 +66,39 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+@media (max-width: 768px) {
+  .board {
+    min-height: auto;
+    margin-bottom: 20px;
+  }
+
+  .board-title {
+    font-size: 1.2rem;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .card-list {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .new-board-form,
+  .new-card-form {
+    width: 100%;
+    margin: 0;
+  }
+
+  .new-board-form button,
+  .new-card-form button {
+    font-size: 1.2rem;
+  }
+
+  button {
+    padding: 1em;
+  }
+}
