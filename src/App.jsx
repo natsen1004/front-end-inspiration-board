@@ -36,9 +36,10 @@ function App () {
 
   const onBoardSelect = (board) => { 
     setSelectedBoard(board);
+    console.log("selected board", board);
     axios
-      // .get(`${boardAPIUrl}/${board.id}/cards`)
-      .get(`${boardAPIUrl}/${board.id}`)
+      .get(`${boardAPIUrl}/${board}/cards`)
+      // .get(`${boardAPIUrl}/${board.id}`)
       .then(response => setCardData(response.data))
       .catch((error) => console.log(error));
   };
@@ -69,6 +70,16 @@ function App () {
           <div className="cards-container">
             <h2>Cards</h2>
             <button>add a card</button>
+            <ul>
+              {cardData.map((card) => (
+                <li key={card.id}>
+                  <p>{card.message}</p>
+                  <p>{card.likes_count}💕</p>
+                  <button>Like</button>
+                  <button>Delete</button>
+                </li>
+              ))}
+            </ul>
           </div>
         </main>
       </div>
