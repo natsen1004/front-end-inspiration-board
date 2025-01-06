@@ -6,6 +6,24 @@ import SelectedBoard from './components/Board.jsx';
 import Boards from './components/Board.jsx';
 import { useEffect } from 'react';
 
+// const boardsData  = [
+//   {
+//     "id": 1,
+//     "owner": "ns",
+//     "title": "Test"
+//   },
+//   {
+//     "id": 2,
+//     "owner": "LLI",
+//     "title": "Daily Gratitude"
+//   },
+//   {
+//     "id": 3,
+//     "owner": "LLI",
+//     "title": "Project Ideas"
+//   }
+// ]
+
 const convertFromApi = (apiCard) => {
   const newCard = {
     ...apiCard,
@@ -20,14 +38,15 @@ function App () {
   const boardAPIUrl = 'https://live-love-inspire-back-end-inspiration.onrender.com/boards'
 
   const [boardsData, setBoardsData] = useState([]);
-  const [selectedBoard, setSelectedBoard] = useState({});
+  const [selectedBoard, setSelectedBoard] = useState(null);
   const [isBoardFormVisible, setIsBoardFormVisible] = useState(true);
 
   const fetchBoards = () => {
     axios.get(boardAPIUrl)
       .then(response => {
         console.log(response)
-        setBoardsData(response.data.boards);
+        console.log(response.data)
+        setBoardsData(response.data);
       })
       .catch((error) => console.log(error));
   };
@@ -38,7 +57,8 @@ function App () {
   const onBoardSelect = (id) => { 
     return axios.get(`${boardAPIUrl}/${id}/cards`)
       .then(response => {
-        setCardData(response.data.cards);
+        console.log(response)
+        setCardData(response.data);
         setSelectedBoard(response.data);
       })
       .catch((error) => console.log(error));
@@ -63,15 +83,16 @@ function App () {
       <div className="App">
         
         <header className="App-header">
-          <h1>CREATE A NEW CARD</h1>
+          <h1>Inspiration Board</h1>
         </header>
         <main>
           <NewCardForm handleSubmit={handleSubmit}/>
-          <Boards boardsData={boardsData} onBoardSelect={onBoardSelect} />
+          {/* <Boards boardsData={boardsData} /> */}
+          <Boards boardsData={boardsData} onBoardSelect={onBoardSelect} /> 
           <SelectedBoard selectedBoard={selectedBoard} cardData={cardData}/>
           <button onClick={togglevisibility}>
-            {isBoardFormVisible ? "Hide Section" : "Show Section"}
-          </button>
+            {isBoardFormVisible ? "Hide Section" : "Show Section"} 
+           </button> 
         </main>
       </div>
     </>

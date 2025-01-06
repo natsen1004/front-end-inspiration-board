@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-
 const Board = ({boardsData, onBoardSelect, selectedBoard}) => {
     const boardcomponents = boardsData.map((board) => {
         return (
