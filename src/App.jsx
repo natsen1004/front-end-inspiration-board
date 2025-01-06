@@ -1,55 +1,68 @@
-import { useState } from 'react'
-import './App.css'
-import Card from './components/Card';
-import CardTest from './CardTest';
+import React, { useEffect, useState } from "react";
+import Card from "./components/Card";
+import axios from 'axios';
 
 function App() {
-    return (
-        <div className="App">
-            <CardTest />
-        </div>
+  const [boards, setBoards] = useState([]);
+  const [selectBoard, setSelectBoard] = useState(null);
+  const [cards, setCards] = useState([]);
+
+  const kbaseUrl = 'https://live-love-inspire-back-end-inspiration.onrender.com';
+
+  // fetch boards
+  useEffect(() => {
+    axios.get(`${baseUrl}/boards`)
+      .then((response) => {
+        setBoards(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching boards', error);
+      });
+    }, []);
+
+  // fetch cards
+  useEffect(() => {
+    if (selectBoard) {
+      axios.get(`${baseUrl}/boards/${selectBoard.id}/cards`)
+        .then((response) => {
+          setCards(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching cards', error);
+        });
+    }
+  }, [selectBoard]);
+
+
+  const handleLikeCard = (id) => {
+    setCards((prevCards) =>
+      prevCards.map((card) =>
+        card.id === id ? { ...card, likes_count: card.likes_count + 1 } : card
+      )
     );
+  };
+
+  const handleDeleteCard = (id) => {
+    setCards((prevCards) => prevCards.filter((card) => card.id !== id));
+  };
+
+   return (
+    <div className="App">
+      <header>
+        <h1>Inspiration Board</h1>
+      </header>
+      <main>
+        <BoardList boards={boards} onBoardSelect={handleBoardSelect} />
+        {selectedBoard && (
+          <CardList
+            cards={cards}
+            onLikeCallback={() => {}}
+            onDeleteCallback={() => {}}
+          />
+        )}
+      </main>
+    </div>
+  );
 }
 
-// function App() {
-//   const [count, setCount] = useState(0)
 
-
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <h1>LLI's Inspiration Board</h1>
-//       </header>
-//       <main>
-//         <div className="board-section">
-//           <BoardList boards={boards} onSelectBoard={handleSelectBoard} />
-//           {showBoardForm && (
-//             <NewBoardForm onSubmit={handleAddBoard} onCancel={() => setShowBoardForm(false)} />
-//           )}
-//           {!showBoardForm && <button onClick={() => setShowBoardForm(true)}>Create New Board</button>}
-//         </div>
-
-//         <div className="selected-board-section">
-//           {selectedBoard ? (
-//             <>
-//               <Board board={selectedBoard} />
-//               <CardList cards={cards} />
-//               {showCardForm && (
-//                 <NewCardForm onSubmit={handleAddCard} onCancel={() => setShowCardForm(false)} />
-//               )}
-//               {!showCardForm && (
-//                 <button onClick={() => setShowCardForm(true)}>Create New Card</button>
-//               )}
-//             </>
-//           ) : (
-//             <p>Select a Board from the Board List!</p>
-//           )}
-//         </div>
-
-//         {errorMessage && <div className="error-message">{errorMessage}</div>}
-//       </main>
-//     </div>
-//   );
-// }
-
-// export default App;
