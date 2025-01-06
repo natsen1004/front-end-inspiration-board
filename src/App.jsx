@@ -1,68 +1,79 @@
-import React, { useEffect, useState } from "react";
-import Card from "./components/Card";
+import './App.css';
+import NewCardForm from './components/NewCardForm.jsx';
 import axios from 'axios';
+import { useState, useEffect} from 'react';
+import Board from './components/Board.jsx';
 
-function App() {
-  const [boards, setBoards] = useState([]);
-  const [selectBoard, setSelectBoard] = useState(null);
-  const [cards, setCards] = useState([]);
 
-  const kbaseUrl = 'https://live-love-inspire-back-end-inspiration.onrender.com';
+const convertFromApi = (apiCard) => {
+  const newCard = {
+    ...apiCard,
+  };
+  return newCard;
+};
 
-  // fetch boards
-  useEffect(() => {
-    axios.get(`${baseUrl}/boards`)
-      .then((response) => {
-        setBoards(response.data);
+function App () {
+  const [cardData, setCardData] = useState([]);
+  const [boardsData, setBoardsData] = useState([]);
+  const [selectedBoard, setSelectedBoard] = useState(null);
+  const [isBoardFormVisible, setIsBoardFormVisible] = useState(true);
+
+  const boardAPIUrl = 'https://live-love-inspire-back-end-inspiration.onrender.com/boards'
+
+
+  const fetchBoards = () => {
+    axios.get(boardAPIUrl)
+      .then(response => {
+        console.log(response)
+        console.log(response.data)
+        setBoardsData(response.data);
       })
-      .catch((error) => {
-        console.error('Error fetching boards', error);
-      });
-    }, []);
+      .catch((error) => console.log(error));
+  };
+  useEffect (() => {
+    fetchBoards();
+  }, []);
 
-  // fetch cards
-  useEffect(() => {
-    if (selectBoard) {
-      axios.get(`${baseUrl}/boards/${selectBoard.id}/cards`)
-        .then((response) => {
-          setCards(response.data);
-        })
-        .catch((error) => {
-          console.error('Error fetching cards', error);
-        });
-    }
-  }, [selectBoard]);
-
-
-  const handleLikeCard = (id) => {
-    setCards((prevCards) =>
-      prevCards.map((card) =>
-        card.id === id ? { ...card, likes_count: card.likes_count + 1 } : card
-      )
-    );
+  const onBoardSelect = (board) => { 
+    setSelectedBoard(board);
+    axios
+      // .get(`${boardAPIUrl}/${board.id}/cards`)
+      .get(`${boardAPIUrl}/${board.id}`)
+      .then(response => setCardData(response.data))
+      .catch((error) => console.log(error));
   };
 
-  const handleDeleteCard = (id) => {
-    setCards((prevCards) => prevCards.filter((card) => card.id !== id));
+  
+  const togglevisibility = () => {
+    setIsBoardFormVisible(!isBoardFormVisible);
   };
 
-   return (
-    <div className="App">
-      <header>
-        <h1>Inspiration Board</h1>
-      </header>
-      <main>
-        <BoardList boards={boards} onBoardSelect={handleBoardSelect} />
-        {selectedBoard && (
-          <CardList
-            cards={cards}
-            onLikeCallback={() => {}}
-            onDeleteCallback={() => {}}
+
+  return (
+    <>
+      <div className="App">
+        
+        <header className="App-header">
+          <h1>Inspiration Board</h1>
+        </header>
+        <main>
+          {/* <NewCardForm handleSubmit={handleSubmit}/> */}
+          <Board 
+            boardsData={boardsData} 
+            onBoardSelect={onBoardSelect} 
+            selectedBoard={selectedBoard} 
           />
-        )}
-      </main>
-    </div>
+          <button onClick={togglevisibility}>
+            {isBoardFormVisible ? "Hide Section" : "Show Section"} 
+          </button> 
+          <div className="cards-container">
+            <h2>Cards</h2>
+            <button>add a card</button>
+          </div>
+        </main>
+      </div>
+    </>
   );
-}
+};
 
-
+export default App;
