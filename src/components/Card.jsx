@@ -1,23 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Card.css";
+import { useState } from "react";
 
-
-const Card = ({ card, onLike, onDelete }) => {
-  const { id, message, likes_count } = card;
+const Card = ({ id, message, likesCount, onLike, onDelete }) => {
+  const [likesCount, setLikesCount] = useState(likesCount);
 
   const handleLike = () => {
-    onLike(id);
-  };
+    onLike(id); 
+  }
 
   const handleDelete = () => {
     onDelete(id);
   };
 
   return (
-    <div className="card">
-      <p className="card-message">{message}</p>
-      <p className="card-likes">{likes_count}💕</p>
+    <div className="card-container">
+      <p className="card-message">{props.message}</p>
+      <p className="card-likes">{props.likes_count}💕</p>
       <div className="card-actions">
         <button className="like-button" onClick={handleLike}>
           +1
@@ -41,3 +41,9 @@ Card.propTypes = {
 };
 
 export default Card;
+
+'''
+const handleLike = () => {
+    onLike(id);
+  }
+'''
