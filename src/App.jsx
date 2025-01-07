@@ -18,6 +18,19 @@ function App () {
   const [boardsData, setBoardsData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [isBoardFormVisible, setIsBoardFormVisible] = useState(true);
+  const [sortOption, setSortOption] = useState('id');
+
+  // Sorting logic
+  const sortedCards = [...cardData].sort((a, b) => {
+    if (sortOption === "id") {
+      return a.id - b.id; // Sort by ID (numerical)
+    } else if (sortOption === "alphabetical") {
+      return a.message.localeCompare(b.message); // Sort alphabetically by message
+    } else if (sortOption === "likes") {
+      return b.likes_count - a.likes_count; // Sort by likes (descending)
+    }
+    return 0;
+  });
 
   const boardAPIUrl = 'https://live-love-inspire-back-end-inspiration.onrender.com/boards'
 
@@ -106,11 +119,28 @@ function App () {
           <button onClick={togglevisibility}>
             {isBoardFormVisible ? "Hide Section" : "Show Section"} 
           </button> 
+          
+          
+          <div className="sort-container">
+            <label htmlFor="sort-cards">Sort Cards:</label>
+            <select
+              id="sort-cards"
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+            >
+              <option value="id">Sort by ID</option>
+              <option value="alphabetical">Sort Alphabetically</option>
+              <option value="likes">Sort by Number of Likes</option>
+            </select>
+          </div>
+
+
           <div className="cards-container">
             <h2>Cards</h2>
             <button>add a card</button>
+
             <ul>
-              {cardData.map((card) => (
+              {sortedCards.map((card) => (
                 <Card 
                   key={card.id}
                   card={card}
