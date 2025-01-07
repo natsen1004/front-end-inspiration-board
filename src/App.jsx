@@ -99,7 +99,14 @@ function App () {
       });
   };
   
-
+  const handleSubmit = (cardData) => {
+    // next line needs to change after define the board API
+    axios.post(`${boardAPIUrl}/${selectedBoard}/cards`, cardData) 
+      .then(result => {
+        setCardData((prevCards) => [convertFromApi(result.data.card), ...prevCards]);
+      })
+      .catch((error) => console.log(error));
+  };
 
 
   return (
@@ -110,7 +117,6 @@ function App () {
           <h1>Inspiration Board</h1>
         </header>
         <main>
-          {/* <NewCardForm handleSubmit={handleSubmit}/> */}
           <Board 
             boardsData={boardsData} 
             onBoardSelect={onBoardSelect} 
@@ -137,8 +143,8 @@ function App () {
 
           <div className="cards-container">
             <h2>Cards</h2>
+            <NewCardForm handleSubmit={handleSubmit}/>
             <button>add a card</button>
-
             <ul>
               {sortedCards.map((card) => (
                 <Card 
