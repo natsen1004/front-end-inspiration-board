@@ -23,11 +23,17 @@ const NewBoardForm = ({ createNewBoard }) => {
       owner,
     };
 
-    createNewBoard(newBoard);
+    try {
+      
+      createNewBoard(newBoard);
 
-    setTitle('');
-    setOwner('');
-    setIsSubmitting(false);
+      setTitle('');
+      setOwner('');
+    } catch (error) {
+      console.error("Error creating board:", error);
+    } finally {
+      setIsSubmitting(false); 
+    }
   };
 
   return (
@@ -66,7 +72,7 @@ const NewBoardForm = ({ createNewBoard }) => {
 };
 
 NewBoardForm.propTypes = {
-  createNewBoard: PropTypes.func.isrequired,
+  createNewBoard: PropTypes.func.isRequired,
 };
 
 export default NewBoardForm;

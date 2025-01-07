@@ -1,4 +1,5 @@
 import './App.css';
+import NewBoardForm from './components/NewBoardForm.jsx';
 import NewCardForm from './components/NewCardForm.jsx';
 import axios from 'axios';
 import { useState, useEffect} from 'react';
@@ -17,6 +18,7 @@ function App () {
   const [cardData, setCardData] = useState([]);
   const [boardsData, setBoardsData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState(null);
+  const [boards, setBoards] = useState([]);
   const [isBoardFormVisible, setIsBoardFormVisible] = useState(true);
   const [sortOption, setSortOption] = useState('id');
 
@@ -58,6 +60,21 @@ function App () {
       .catch((error) => console.log(error));
   };
 
+  const createNewBoard = async (newBoard) => {
+    const response = await fetch('https://live-love-inspire-back-end-inspiration.onrender.com/boards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newBoard),
+    });
+  
+    const createdBoard = await response.json();
+    setBoards((prevBoards) => [...prevBoards, createdBoard]);  
+    console.log('Board created', createdBoard);
+    return createdBoard;
+  };
+  
   
   const togglevisibility = () => {
     setIsBoardFormVisible(!isBoardFormVisible);
@@ -122,6 +139,15 @@ function App () {
             onBoardSelect={onBoardSelect} 
             selectedBoard={selectedBoard} 
           />
+          <NewBoardForm createNewBoard={createNewBoard} />
+          <div>
+            <h2>Boards</h2>
+            <ul>
+              {boards.map((board) => (
+                <li key={board.id}>{board.title} - {board.owner}</li>
+              ))}
+            </ul>
+          </div>
           <button onClick={togglevisibility}>
             {isBoardFormVisible ? "Hide Section" : "Show Section"} 
           </button> 
