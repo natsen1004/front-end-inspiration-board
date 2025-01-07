@@ -3,6 +3,7 @@ import NewCardForm from './components/NewCardForm.jsx';
 import axios from 'axios';
 import { useState, useEffect} from 'react';
 import Board from './components/Board.jsx';
+import Card from './components/Card.jsx';
 
 
 const convertFromApi = (apiCard) => {
@@ -48,6 +49,44 @@ function App () {
   const togglevisibility = () => {
     setIsBoardFormVisible(!isBoardFormVisible);
   };
+  
+  
+  const handleLike = (cardId) => {
+    axios
+    .put(`${boardAPIUrl}/${selectedBoard}/cards/${cardId}`)
+    .then((response) => {
+      console.log("Like response:", response.data);
+
+      const updatedCard = response.data.card;
+
+      const updatedCardData = cardData.map((card) =>
+        card.id === updatedCard.id ? updatedCard : card
+      );
+
+      setCardData(updatedCardData);
+    })
+    
+    .catch((error) => {
+      console.log("Error updating likes:",error);
+    });  
+  };
+
+  const handleDelete = (cardId) => {
+    axios
+      .delete(`${boardAPIUrl}/${selectedBoard}/cards/${cardId}`)
+      .then(() => {
+        console.log(`Card ${cardId} deleted`);
+  
+        // Remove the deleted card from state
+        const updatedCardData = cardData.filter((card) => card.id !== cardId);
+        setCardData(updatedCardData);
+      })
+      .catch((error) => {
+        console.error("Error deleting card:", error);
+      });
+  };
+  
+
 
 
   return (
@@ -72,12 +111,12 @@ function App () {
             <button>add a card</button>
             <ul>
               {cardData.map((card) => (
-                <li key={card.id}>
-                  <p>{card.message}</p>
-                  <p>{card.likes_count}💕</p>
-                  <button>Like</button>
-                  <button>Delete</button>
-                </li>
+                <Card 
+                  key={card.id}
+                  card={card}
+                  handleLike={handleLike}
+                  handleDelete={handleDelete}
+                />
               ))}
             </ul>
           </div>
@@ -88,3 +127,12 @@ function App () {
 };
 
 export default App;
+
+              {/* {cardData.map((card) => (
+                <li key={card.id}>
+                  <p>{card.message}</p>
+                  <p>{card.likes_count}💕</p>
+                  <button>Like</button>
+                  <button>Delete</button>
+                </li>
+              ))} */}
