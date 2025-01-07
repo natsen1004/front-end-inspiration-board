@@ -144,7 +144,6 @@ function App () {
           <div className="cards-container">
             <h2>Cards</h2>
             <NewCardForm handleSubmit={handleSubmit}/>
-            <button>add a card</button>
             <ul>
               {sortedCards.map((card) => (
                 <Card 
