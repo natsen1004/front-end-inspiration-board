@@ -79,11 +79,6 @@ function App () {
     console.log('Board created', createdBoard);
     return createdBoard;
   };
-
-  const togglevisibility = () => {
-    setIsBoardFormVisible(!isBoardFormVisible);
-  };
-
   
   const togglevisibility = () => {
     setIsBoardFormVisible(!isBoardFormVisible);
@@ -191,7 +186,7 @@ function App () {
           <button className="hide-form-btn" onClick={togglevisibility}>
             {isBoardFormVisible ? "Hide Form" : "Show Form"}
           </button>
-          <NewCardForm handleSubmit={handleSubmit} />
+          {selectedBoard && (<NewCardForm handleSubmit={handleSubmit} />)}
         </div>
       </div>
     </>

@@ -28,12 +28,12 @@ const NewCardForm = ({ handleSubmit }) => {
           id="message"
           name="message"
           value={formData.message}
-          onChange={handleChange} />
+          onChange={handleChange} maxlength="40"/>
                 <div style={{ display: 'inline' }}>
         <label htmlFor="preview"> Preview: </label>
         <p id="preview" style={{ display: 'inline'}}>{formData.preview}</p>
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" >Submit</button>
       </div>
     </form>
   );
