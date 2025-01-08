@@ -22,21 +22,26 @@ const NewBoardForm = ({ createNewBoard }) => {
       title,
       owner,
     };
+    try {
+      
+      createNewBoard(newBoard);
 
-    createNewBoard(newBoard);
-
-    setTitle('');
-    setOwner('');
-    setIsSubmitting(false);
+      setTitle('');
+      setOwner('');
+    } catch (error) {
+      console.error("Error creating board:", error);
+    } finally {
+      setIsSubmitting(false); 
+    }
   };
 
   return (
-    <div>
-      <h2>Create a New Board</h2>
+    <div className="form-container">
+      <h2 className="form-container-h2">✎ᝰ.Create a New Board✎ᝰ.</h2>
       <form onSubmit={handleSubmit}>
         <div>
 
-          <label htmlFor="title">Board Title</label>
+          <label htmlFor="title">Title: </label>
           <input 
             type="text"
             id="title"
@@ -47,7 +52,7 @@ const NewBoardForm = ({ createNewBoard }) => {
         </div>
 
         <div>
-          <label htmlFor="owner">Owner</label>
+          <label htmlFor="owner">Owner: </label>
           <input 
             type="text"
             id="owner"
@@ -57,7 +62,8 @@ const NewBoardForm = ({ createNewBoard }) => {
           />
         </div>
 
-        <button type="submit" disabled={isSubmitting}>
+
+        <button className="create-board-btn" type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Creating Board...' : 'Create Board'}
         </button>
       </form>
@@ -66,7 +72,7 @@ const NewBoardForm = ({ createNewBoard }) => {
 };
 
 NewBoardForm.propTypes = {
-  createNewBoard: PropTypes.func.isrequired,
+  createNewBoard: PropTypes.func.isRequired,
 };
 
 export default NewBoardForm;

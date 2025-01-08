@@ -1,4 +1,9 @@
 import './App.css';
+import './components/Board.css';
+import './components/Card.css';
+import './components/NewBoardForm.css';
+import './components/NewCardForm.css';
+import NewBoardForm from './components/NewBoardForm.jsx';
 import NewCardForm from './components/NewCardForm.jsx';
 import axios from 'axios';
 import { useState, useEffect} from 'react';
@@ -15,6 +20,7 @@ const convertFromApi = (apiCard) => {
 
 function App () {
   const [cardData, setCardData] = useState([]);
+  const [boards, setBoards] = useState([]);
   const [boardsData, setBoardsData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [isBoardFormVisible, setIsBoardFormVisible] = useState(true);
@@ -48,7 +54,8 @@ function App () {
     fetchBoards();
   }, []);
 
-  const onBoardSelect = (board) => { 
+
+  const onBoardSelect = (board) => {
     setSelectedBoard(board);
     console.log("selected board", board);
     axios
@@ -58,11 +65,29 @@ function App () {
       .catch((error) => console.log(error));
   };
 
+  const createNewBoard = async (newBoard) => {
+    const response = await fetch('https://live-love-inspire-back-end-inspiration.onrender.com/boards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newBoard),
+    });
+  
+    const createdBoard = await response.json();
+    setBoards((prevBoards) => [...prevBoards, createdBoard]);  
+    console.log('Board created', createdBoard);
+    return createdBoard;
+  };
+
+  const togglevisibility = () => {
+    setIsBoardFormVisible(!isBoardFormVisible);
+  };
+
   
   const togglevisibility = () => {
     setIsBoardFormVisible(!isBoardFormVisible);
   };
-  
   
   const handleLike = (cardId) => {
     axios
@@ -112,62 +137,66 @@ function App () {
   return (
     <>
       <div className="App">
-        
-        <header className="App-header">
-          <h1>Inspiration Board</h1>
-        </header>
-        <main>
-          <Board 
-            boardsData={boardsData} 
-            onBoardSelect={onBoardSelect} 
-            selectedBoard={selectedBoard} 
-          />
-          <button onClick={togglevisibility}>
-            {isBoardFormVisible ? "Hide Section" : "Show Section"} 
-          </button> 
-          
-          
-          <div className="sort-container">
-            <label htmlFor="sort-cards">Sort Cards:</label>
-            <select
-              id="sort-cards"
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-            >
-              <option value="id">Sort by ID</option>
-              <option value="alphabetical">Sort Alphabetically</option>
-              <option value="likes">Sort by Number of Likes</option>
-            </select>
-          </div>
-
-
-          <div className="cards-container">
-            <h2>Cards</h2>
-            <NewCardForm handleSubmit={handleSubmit}/>
-            <ul>
-              {sortedCards.map((card) => (
-                <Card 
-                  key={card.id}
-                  card={card}
-                  handleLike={handleLike}
-                  handleDelete={handleDelete}
-                />
+        <div className="left-side">
+          <header className="App-header">
+            <h1 className="h1">⋆. 𐙚 ̊Inspiration Board⋆. 𐙚 ̊</h1>
+          </header>
+          <main>
+            <Board 
+              boardsData={boardsData} 
+              onBoardSelect={onBoardSelect}
+              // handleDelete={handleDelete} 
+            />
+            <div>
+              {boards.map((board) => (
+                <div key={board.id}>
+                  <h2>{board.title}</h2>
+                  <p>{board.owner}</p>
+                </div>
               ))}
-            </ul>
-          </div>
-        </main>
+            </div>
+  
+            {selectedBoard && (
+              <div className="cards-container">
+                <h2>⋆⭒˚.⋆Cards⋆⭒˚.⋆</h2>
+                <ul className="cards">
+                  {sortedCards.map((card) => (
+                    <Card 
+                      key={card.id}
+                      card={card}
+                      handleLike={handleLike}
+                      handleDelete={handleDelete}
+                    />
+                  ))}
+                </ul>
+              </div>
+            )}
+  
+            <div className="sort-container">
+              <label htmlFor="sort-cards">Sort Cards:</label>
+              <select
+                id="sort-cards"
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+              >
+                <option value="id">Sort by ID</option>
+                <option value="alphabetical">Sort Alphabetically</option>
+                <option value="likes">Sort by Number of Likes</option>
+              </select>
+            </div>
+          </main>
+        </div>
+        <div className="right-side">
+          {isBoardFormVisible && <NewBoardForm createNewBoard={createNewBoard} />}
+          <button className="hide-form-btn" onClick={togglevisibility}>
+            {isBoardFormVisible ? "Hide Form" : "Show Form"}
+          </button>
+          <NewCardForm handleSubmit={handleSubmit} />
+        </div>
       </div>
     </>
   );
+  
 };
 
 export default App;
-
-              {/* {cardData.map((card) => (
-                <li key={card.id}>
-                  <p>{card.message}</p>
-                  <p>{card.likes_count}💕</p>
-                  <button>Like</button>
-                  <button>Delete</button>
-                </li>
-              ))} */}

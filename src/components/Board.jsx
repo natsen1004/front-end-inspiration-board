@@ -8,20 +8,22 @@ const Board = ({boardsData=[], onBoardSelect, selectedBoard}) => {
     });
 
     return (
-        <div>
-            <h2 className='title-board'> Boards </h2>
+        <div  className='board'>
+            <h2>⋆⭒˚.⋆Boards⋆⭒˚.⋆</h2>
+
             <div className='list-board'>
                 <ol>
                     {boardcomponents}
                 </ol>
             </div>
             <div className='selected-board'>
-                <h2 className='title-selected-board'> Selected Board </h2>
+                <h2 className='title-selected-board'> Select a board</h2>
                 {selectedBoard ? (
                     <p>{selectedBoard.title}</p>
                 ) : (
                     <p>Select a Board from the Board List</p>
                 )}
+                {/* <button className="board-delete-btn" onClick={() => handleDelete(Board.id)}>Delete</button> */}
             </div>
         </div>
     );
@@ -38,6 +40,7 @@ Board.propTypes = {
     ).isRequired,
     onBoardSelect: PropTypes.func.isRequired,
     selectedBoard: PropTypes.object.isRequired,
+    // handleDelete: PropTypes.func.isRequired,
 };
 
 export default Board;
