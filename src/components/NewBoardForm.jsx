@@ -22,7 +22,6 @@ const NewBoardForm = ({ createNewBoard }) => {
       title,
       owner,
     };
-
     try {
       
       createNewBoard(newBoard);
@@ -62,6 +61,7 @@ const NewBoardForm = ({ createNewBoard }) => {
             required
           />
         </div>
+
 
         <button className="create-board-btn" type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Creating Board...' : 'Create Board'}

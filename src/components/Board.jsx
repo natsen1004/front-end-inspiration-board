@@ -10,6 +10,7 @@ const Board = ({boardsData=[], onBoardSelect, selectedBoard}) => {
     return (
         <div  className='board'>
             <h2>⋆⭒˚.⋆Boards⋆⭒˚.⋆</h2>
+
             <div className='list-board'>
                 <ol>
                     {boardcomponents}

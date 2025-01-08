@@ -54,6 +54,7 @@ function App () {
     fetchBoards();
   }, []);
 
+
   const onBoardSelect = (board) => {
     setSelectedBoard(board);
     console.log("selected board", board);
@@ -83,6 +84,11 @@ function App () {
     setIsBoardFormVisible(!isBoardFormVisible);
   };
 
+  
+  const togglevisibility = () => {
+    setIsBoardFormVisible(!isBoardFormVisible);
+  };
+  
   const handleLike = (cardId) => {
     axios
     .put(`${boardAPIUrl}/${selectedBoard}/cards/${cardId}`)
