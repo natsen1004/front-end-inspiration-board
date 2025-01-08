@@ -5,7 +5,6 @@ import './components/NewBoardForm.css';
 import './components/NewCardForm.css';
 import NewBoardForm from './components/NewBoardForm.jsx';
 import NewCardForm from './components/NewCardForm.jsx';
-import SelectedBoard from './components/SelectedBoard.jsx';
 import axios from 'axios';
 import { useState, useEffect} from 'react';
 import Board from './components/Board.jsx';
@@ -134,12 +133,13 @@ function App () {
       <div className="App">
         <div className="left-side">
           <header className="App-header">
-            <h1 className="h1">Inspiration Board</h1>
+            <h1 className="h1">⋆. 𐙚 ̊Inspiration Board⋆. 𐙚 ̊</h1>
           </header>
           <main>
             <Board 
               boardsData={boardsData} 
-              onBoardSelect={onBoardSelect}  
+              onBoardSelect={onBoardSelect}
+              // handleDelete={handleDelete} 
             />
             <div>
               {boards.map((board) => (
@@ -150,16 +150,10 @@ function App () {
               ))}
             </div>
   
-            {selectedBoard ? (
-              <SelectedBoard board={selectedBoard} />
-            ) : (
-              <p>Please select a board</p>
-            )}
-  
             {selectedBoard && (
-              <div className="cards-content">
-                <h2>Cards</h2>
-                <ul>
+              <div className="cards-container">
+                <h2>⋆⭒˚.⋆Cards⋆⭒˚.⋆</h2>
+                <ul className="cards">
                   {sortedCards.map((card) => (
                     <Card 
                       key={card.id}

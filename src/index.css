@@ -4,11 +4,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
 
   font-family:  "Jersey 15", serif;
   line-height: 1.5;
   font-weight: 400;
   font-style: normal;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -36,6 +38,9 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #FFE4E1;
+  overflow: auto;
+  width: 100vw;
 }
 
 h1 {

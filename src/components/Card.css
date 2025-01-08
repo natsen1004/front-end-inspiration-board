@@ -1,21 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
 
-.cards-content{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+.cards-container{
+  display: grid;
+  gap: 20px;
+  justify-content: center;
   background-color: #ffb6c1;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 20px;
   margin: 15px;
-  width: 500px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
-  .card-container{
+.cards-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card-content{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -27,13 +36,13 @@
     width: 250px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  
-  .card-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
+}
+
+.card-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
   
   .card-message {
     font-size: 1.1rem;
@@ -96,7 +105,6 @@
     font-size: 1.5rem;
     color: white;
     font-weight: 500;
-    margin-right: 20px;
   }
   
   .sort-container select {

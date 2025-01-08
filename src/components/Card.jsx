@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 // }
 function Card({ card, handleLike, handleDelete }) {
   return (
-      <li className="card-container">
+      <li className="card-content">
         <p className="card-message">{card.message}</p>
         <p className="card-likes">{card.likes_count} 💕</p>
         <div className="card-buttons">
