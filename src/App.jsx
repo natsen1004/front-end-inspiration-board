@@ -1,5 +1,6 @@
 import './App.css';
 import './components/Board.css';
+import './components/Card.css';
 import './components/NewBoardForm.css';
 import './components/NewCardForm.css';
 import NewBoardForm from './components/NewBoardForm.jsx';
@@ -133,7 +134,7 @@ function App () {
       <div className="App">
         <div className="left-side">
           <header className="App-header">
-            <h1>Inspiration Board</h1>
+            <h1 className="h1">Inspiration Board</h1>
           </header>
           <main>
             <Board 
@@ -187,7 +188,7 @@ function App () {
         </div>
         <div className="right-side">
           {isBoardFormVisible && <NewBoardForm createNewBoard={createNewBoard} />}
-          <button onClick={togglevisibility}>
+          <button className="hide-form-btn" onClick={togglevisibility}>
             {isBoardFormVisible ? "Hide Form" : "Show Form"}
           </button>
           <NewCardForm handleSubmit={handleSubmit} />

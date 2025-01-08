@@ -42,7 +42,7 @@ const NewBoardForm = ({ createNewBoard }) => {
       <form onSubmit={handleSubmit}>
         <div>
 
-          <label htmlFor="title">Board Title</label>
+          <label htmlFor="title">Title: </label>
           <input 
             type="text"
             id="title"
@@ -53,7 +53,7 @@ const NewBoardForm = ({ createNewBoard }) => {
         </div>
 
         <div>
-          <label htmlFor="owner">Owner</label>
+          <label htmlFor="owner">Owner: </label>
           <input 
             type="text"
             id="owner"
@@ -63,7 +63,7 @@ const NewBoardForm = ({ createNewBoard }) => {
           />
         </div>
 
-        <button type="submit" disabled={isSubmitting}>
+        <button className="create-board-btn" type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Creating Board...' : 'Create Board'}
         </button>
       </form>

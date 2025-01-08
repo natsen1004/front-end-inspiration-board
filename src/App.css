@@ -61,8 +61,8 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  margin-top: 200px;
-  margin-left: 100px;
+  margin-top: 500px;
+  margin-left: 200px;
 }
 
 .form-container {
@@ -79,9 +79,10 @@
   cursor: pointer;
 }
 
-
 button {
   margin-top: 20px;
+  background-color: white;
+  color: black;
 }
 
 @media (max-width: 768px) {

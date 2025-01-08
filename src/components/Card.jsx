@@ -1,7 +1,6 @@
 // Card.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Card.css';
 
 // function Card({ card, handleLike, handleDelete }) {
 //   return (

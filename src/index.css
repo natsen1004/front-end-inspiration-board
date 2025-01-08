@@ -1,11 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+
 :root {
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-family:  "Jersey 15", serif;
   line-height: 1.5;
   font-weight: 400;
+  font-style: normal;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);

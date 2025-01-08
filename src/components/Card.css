@@ -1,17 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+
 .cards-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffb6c1;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 15px;
-    width: 500px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffb6c1;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px;
+  width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
   .card-container{
     display: flex;
@@ -22,7 +24,7 @@
     border-radius: 12px;
     padding: 20px;
     margin: 25px;
-    width: 350px;
+    width: 250px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
   }
@@ -85,25 +87,25 @@
   }
   
   .sort-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     margin: 20px 0;
+    background-color: #db6093;
+    border-radius: 10px;
   }
   
   .sort-container label {
-    font-size: 1rem;
-    color: #4a4a4a;
+    font-size: 1.5rem;
+    color: white;
     font-weight: 500;
+    margin-right: 20px;
   }
   
   .sort-container select {
-    padding: 8px 12px;
+    font-family: "Jersey 15", serif;
     font-size: 1rem;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    background-color: #ffffff;
-    color: #4a4a4a;
+    background-color: #FFF0F5;
+    color: black;
     cursor: pointer;
     transition: border-color 0.2s, box-shadow 0.2s;
   }

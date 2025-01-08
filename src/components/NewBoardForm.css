@@ -9,10 +9,20 @@
   flex-direction: column;
   gap: 15px;
   cursor: pointer;
+  align-items: center;
 }
 
 
 .form-container:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.form-container input {
+  border-radius: 10px;
+}
+
+.create-board-btn {
+  background-color: white; 
+  color: black;
 }
