@@ -14,7 +14,7 @@
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: black;
   background-color: #242424;
 
   font-synthesis: none;
@@ -42,6 +42,7 @@ body {
   background-color: #FFE4E1;
   overflow: auto;
   width: 100vw;
+}
 
 h1 {
   font-size: 3.2em;
