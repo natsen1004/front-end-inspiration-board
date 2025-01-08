@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
 
 :root {
@@ -11,6 +12,7 @@
   font-weight: 400;
   font-style: normal;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+in
 
   color-scheme: light dark;
   color: black;
@@ -41,7 +43,6 @@ body {
   background-color: #FFE4E1;
   overflow: auto;
   width: 100vw;
-}
 
 h1 {
   font-size: 3.2em;
