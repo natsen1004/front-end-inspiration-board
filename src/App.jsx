@@ -63,7 +63,45 @@ function App () {
     setIsBoardFormVisible(!isBoardFormVisible);
   };
   
-  
+  const handleDeleteBoard = (boardId) => {
+    axios
+      .delete(`${boardAPIUrl}/${boardId}`)
+      .then(() => {
+        console.log(`Board ${boardId} deleted`);
+        
+        const updatedBoardsData = boardsData.filter((board) => board.id !== boardId);
+        setBoardsData(updatedBoardsData);
+
+        if (selectedBoard === boardId) {
+          setSelectedBoard(null);
+          setCardData([]);
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting board:", error);
+      });
+  };
+
+  const handleUpdateBoard = (boardId, updatedBoardData) => {
+    axios
+      .put(`${boardAPIUrl}/${boardId}`, updatedBoardData)
+      .then((response) => {
+        console.log(`Board ${boardId} updated`, response.data);
+
+        const updatedBoardsData = boardsData.map((board) =>
+          board.id === boardId ? response.data : board
+        );
+
+        setBoardsData(updatedBoardsData);
+
+        if (selectedBoard === boardId) {
+          setSelectedBoard(response.data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating board:", error);
+      });
+  };
   const handleLike = (cardId) => {
     axios
     .put(`${boardAPIUrl}/${selectedBoard}/cards/${cardId}`)
@@ -122,6 +160,8 @@ function App () {
             onBoardSelect={onBoardSelect} 
             selectedBoard={selectedBoard} 
           />
+          <button onClick={() => handleDeleteBoard(selectedBoard)}>Delete Selected Board</button>
+          <button onClick={() => handleUpdateBoard(selectedBoard)}>Update Selected Board</button>
           <button onClick={togglevisibility}>
             {isBoardFormVisible ? "Hide Section" : "Show Section"} 
           </button> 
