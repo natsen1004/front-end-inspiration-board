@@ -13,7 +13,7 @@ SelectedBoard.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     owner: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
 };
 
 export default SelectedBoard;

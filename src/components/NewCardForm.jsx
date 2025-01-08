@@ -20,7 +20,7 @@ const NewCardForm = ({ handleSubmit }) => {
 
   return (
     <form onSubmit = {onHandleSubmit}>
-      <div>
+      <div className="form-container">
         <label htmlFor="message"> Message </label>
         <input
           type='text'
@@ -34,7 +34,7 @@ const NewCardForm = ({ handleSubmit }) => {
         <p id="preview" style={{ display: 'inline'}}>{formData.preview}</p>
       </div>
       <div>
-        <input type="submit" value="submit" />
+        <input id="submit-button" type="submit" value="submit" />
       </div>
     </form>
   );

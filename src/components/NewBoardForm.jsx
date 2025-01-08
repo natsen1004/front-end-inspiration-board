@@ -37,8 +37,8 @@ const NewBoardForm = ({ createNewBoard }) => {
   };
 
   return (
-    <div>
-      <h2>Create a New Board</h2>
+    <div className="form-container">
+      <h2 className="form-container-h2">Create a New Board</h2>
       <form onSubmit={handleSubmit}>
         <div>
 

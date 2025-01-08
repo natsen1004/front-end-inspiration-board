@@ -1,17 +1,32 @@
-.card-container {
+.cards-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffb6c1;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px;
+    width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .card-container{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
-    border: 1px solid #e0e0e0;
     border-radius: 12px;
     padding: 20px;
-    margin: 15px;
-    width: 280px;
+    margin: 25px;
+    width: 350px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
   }
+  
   
   .card-container:hover {
     transform: translateY(-5px);
