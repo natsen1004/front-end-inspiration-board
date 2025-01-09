@@ -10,20 +10,18 @@ const Board = ({boardsData=[], onBoardSelect, selectedBoard}) => {
     return (
         <div  className='board'>
             <h2>⋆⭒˚.⋆Boards⋆⭒˚.⋆</h2>
-
+            <div className='selected-board'>
+                {selectedBoard ? (
+                    <p>Selected board: {boardsData.find((board) => board.id === selectedBoard)?.title || null}</p>
+                ) : (
+                    <p>Select a Board from the board List</p>
+                )}
+                {/* <button className="board-delete-btn" onClick={() => handleDelete(Board.id)}>Delete</button> */}
+            </div>
             <div className='list-board'>
                 <ol>
                     {boardcomponents}
                 </ol>
-            </div>
-            <div className='selected-board'>
-                <h2 className='title-selected-board'> Select a board</h2>
-                {selectedBoard ? (
-                    <p>{selectedBoard.title}</p>
-                ) : (
-                    <p>Select a Board from the Board List</p>
-                )}
-                {/* <button className="board-delete-btn" onClick={() => handleDelete(Board.id)}>Delete</button> */}
             </div>
         </div>
     );

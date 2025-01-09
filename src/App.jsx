@@ -140,6 +140,7 @@ function App () {
             <Board 
               boardsData={boardsData} 
               onBoardSelect={onBoardSelect}
+              selectedBoard={selectedBoard}
               // handleDelete={handleDelete} 
             />
             <div>
@@ -166,7 +167,7 @@ function App () {
                 </ul>
               </div>
             )}
-  
+            {selectedBoard && (
             <div className="sort-container">
               <label htmlFor="sort-cards">Sort Cards:</label>
               <select
@@ -179,6 +180,7 @@ function App () {
                 <option value="likes">Sort by Number of Likes</option>
               </select>
             </div>
+            )}
           </main>
         </div>
         <div className="right-side">
@@ -186,7 +188,9 @@ function App () {
           <button className="hide-form-btn" onClick={togglevisibility}>
             {isBoardFormVisible ? "Hide Form" : "Show Form"}
           </button>
-          {selectedBoard && (<NewCardForm handleSubmit={handleSubmit} />)}
+          {selectedBoard && (
+            <NewCardForm handleSubmit={handleSubmit} />
+            )}
         </div>
       </div>
     </>
