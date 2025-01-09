@@ -66,18 +66,11 @@ function App () {
   };
 
   const createNewBoard = async (newBoard) => {
-    const response = await fetch('https://live-love-inspire-back-end-inspiration.onrender.com/boards', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newBoard),
-    });
-  
-    const createdBoard = await response.json();
-    setBoards((prevBoards) => [...prevBoards, createdBoard]);  
-    console.log('Board created', createdBoard);
-    return createdBoard;
+    axios.post(`${boardAPIUrl}`, newBoard) 
+      .then(result => {
+        setBoardsData((prevBoards) => [...prevBoards, result.data.board]);  
+      })
+      .catch((error) => console.log(error));
   };
   
   const togglevisibility = () => {
