@@ -83,6 +83,25 @@ function App () {
   const togglevisibility = () => {
     setIsBoardFormVisible(!isBoardFormVisible);
   };
+
+
+  const handleDeleteBoard = () => {
+    if (selectedBoard) {
+      axios
+        .delete(`${boardAPIUrl}/${selectedBoard}`)
+        .then(() => {
+          console.log(`Board ${selectedBoard} deleted`);
+          
+          const updatedBoardsData = boardsData.filter((board) => board.id !== selectedBoard);
+          setBoardsData(updatedBoardsData);
+          setSelectedBoard(null);
+          setCardData([]);
+        })
+        .catch((error) => {
+          console.error("Error deleting selected board:", error);
+        });
+    }
+  };
   
   const handleLike = (cardId) => {
     axios
@@ -141,17 +160,19 @@ function App () {
               boardsData={boardsData} 
               onBoardSelect={onBoardSelect}
               selectedBoard={selectedBoard}
-              // handleDelete={handleDelete} 
+              handleDeleteBoard={handleDeleteBoard} 
+              
             />
             <div>
               {boards.map((board) => (
                 <div key={board.id}>
                   <h2>{board.title}</h2>
                   <p>{board.owner}</p>
+                  
                 </div>
               ))}
             </div>
-  
+          
             {selectedBoard && (
               <div className="cards-container">
                 <h2>⋆⭒˚.⋆Cards⋆⭒˚.⋆</h2>

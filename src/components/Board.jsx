@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Board = ({boardsData=[], onBoardSelect, selectedBoard}) => {
+const Board = ({boardsData=[], onBoardSelect, selectedBoard, handleDeleteBoard}) => {
     const boardcomponents = boardsData.map((board) => {
         return (
             <li key={board.id} onClick={() => onBoardSelect(board.id)}> {board.title} </li>
@@ -8,15 +8,17 @@ const Board = ({boardsData=[], onBoardSelect, selectedBoard}) => {
     });
 
     return (
-        <div  className='board'>
+        <div className='board'>
             <h2>⋆⭒˚.⋆Boards⋆⭒˚.⋆</h2>
             <div className='selected-board'>
                 {selectedBoard ? (
-                    <p>Selected board: {boardsData.find((board) => board.id === selectedBoard)?.title || null}</p>
+                    <>
+                        <p>Selected board: {boardsData.find((board) => board.id === selectedBoard)?.title || null}</p>
+                        <button className="board-delete-btn" onClick={() => handleDeleteBoard(selectedBoard.id)}>Delete Selected Board</button>
+                    </>
                 ) : (
                     <p>Select a Board from the board List</p>
                 )}
-                {/* <button className="board-delete-btn" onClick={() => handleDelete(Board.id)}>Delete</button> */}
             </div>
             <div className='list-board'>
                 <ol>
@@ -38,7 +40,7 @@ Board.propTypes = {
     ).isRequired,
     onBoardSelect: PropTypes.func.isRequired,
     selectedBoard: PropTypes.object.isRequired,
-    // handleDelete: PropTypes.func.isRequired,
+    handleDeleteBoard: PropTypes.func.isRequired,
 };
 
 export default Board;
